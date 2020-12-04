@@ -1,9 +1,17 @@
 package main
 
-import "github.com/vivaldy22/simpleRestApiLA/config"
+import (
+	"log"
+
+	"github.com/vivaldy22/simpleRestApiLA/config"
+)
 
 func main() {
-	db := config.InitDB()
+	db, err := config.InitDB()
+	if err != nil {
+		log.Println(err)
+		return
+	}
 	router := config.CreateRouter()
 	config.InitRouters(db, router)
 	config.RunServer(router)
