@@ -30,6 +30,7 @@ func RunServer(r *mux.Router) {
 		}
 		return nil
 	})
+	fmt.Println()
 	err := http.ListenAndServe(host+": "+port, r)
 	if err != nil {
 		log.Fatal(err)
