@@ -8,12 +8,12 @@ import (
 )
 
 type accRepo struct {
-	db *sql.DB
+	*sql.DB
 }
 
 func (a *accRepo) GetByAccNum(accNum string) (*models.Account, error) {
 	var acc = new(models.Account)
-	row := a.db.QueryRow(queries.GET_ACCOUNT_BY_ACC_NUM, accNum)
+	row := a.QueryRow(queries.GET_ACCOUNT_BY_ACC_NUM, accNum)
 	err := row.Scan(&acc.AccountNumber, &acc.CustomerNumber, &acc.Balance)
 
 	if err != nil {
@@ -23,7 +23,7 @@ func (a *accRepo) GetByAccNum(accNum string) (*models.Account, error) {
 }
 
 func (a *accRepo) Transfer(from, to, amount string) error {
-	tx, err := a.db.Begin()
+	tx, err := a.Begin()
 	if err != nil {
 		return err
 	}

@@ -13,5 +13,5 @@ type AccountRepo interface {
 
 type AccountUseCase interface {
 	GetByAccNum(accNum string) (*Account, error)
-	Transfer(from, to, amount string) (string, error)
+	TransferBalance(from, to, amount string) (string, error)
 }

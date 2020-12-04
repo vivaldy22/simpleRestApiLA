@@ -9,20 +9,20 @@ import (
 )
 
 type accUseCase struct {
-	accRepo models.AccountRepo
+	models.AccountRepo
 }
 
 func (a *accUseCase) GetByAccNum(accNum string) (*models.Account, error) {
-	return a.accRepo.GetByAccNum(accNum)
+	return a.GetByAccNum(accNum)
 }
 
-func (a *accUseCase) Transfer(from, to, amount string) (string, error) {
+func (a *accUseCase) TransferBalance(from, to, amount string) (string, error) {
 	intAmount, err := strconv.Atoi(amount)
 	if err != nil {
 		return "Amount is not a valid number", err
 	}
 
-	accFrom, err := a.accRepo.GetByAccNum(from)
+	accFrom, err := a.GetByAccNum(from)
 	if err != nil {
 		return fmt.Sprintf("Account %v doesn't exist", from), err
 	}
@@ -36,7 +36,7 @@ func (a *accUseCase) Transfer(from, to, amount string) (string, error) {
 		return "You need to fill the amount, minimum 1", errors.New("amount can not be 0")
 	}
 
-	_, err = a.accRepo.GetByAccNum(to)
+	_, err = a.GetByAccNum(to)
 	if err != nil {
 		return fmt.Sprintf("Account %v doesn't exist", to), err
 	}
@@ -49,7 +49,7 @@ func (a *accUseCase) Transfer(from, to, amount string) (string, error) {
 		return "You can not transfer to your own account", errors.New("can not transfer same account")
 	}
 
-	if err = a.accRepo.Transfer(from, to, amount); err != nil {
+	if err = a.Transfer(from, to, amount); err != nil {
 		return "Transfer failed, see logs", err
 	}
 
