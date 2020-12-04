@@ -17,11 +17,11 @@ type accController struct {
 func NewController(accUseCase models.AccountUseCase, r *mux.Router) {
 	handler := &accController{accUseCase}
 	pref := r.PathPrefix("/account").Subrouter()
-	pref.HandleFunc("/{account_number}", handler.getAccByAccNum).Methods(http.MethodGet)
-	pref.HandleFunc("/{from_account_number}/transfer", handler.transferBalance).Methods(http.MethodPost)
+	pref.HandleFunc("/{account_number}", handler.GetAccByAccNum).Methods(http.MethodGet)
+	pref.HandleFunc("/{from_account_number}/transfer", handler.TransferBalance).Methods(http.MethodPost)
 }
 
-func (a *accController) getAccByAccNum(w http.ResponseWriter, r *http.Request) {
+func (a *accController) GetAccByAccNum(w http.ResponseWriter, r *http.Request) {
 	accNum := varMux.GetVarsMux("account_number", r)
 
 	data, err := a.c.GetByAccNum(accNum)
@@ -32,7 +32,7 @@ func (a *accController) getAccByAccNum(w http.ResponseWriter, r *http.Request) {
 	respJson.WriteJSON(true, http.StatusOK, "Data found", data, nil, w)
 }
 
-func (a *accController) transferBalance(w http.ResponseWriter, r *http.Request) {
+func (a *accController) TransferBalance(w http.ResponseWriter, r *http.Request) {
 	var transferInfo = new(models.Transfer)
 	from := varMux.GetVarsMux("from_account_number", r)
 
