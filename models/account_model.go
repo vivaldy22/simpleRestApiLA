@@ -7,6 +7,11 @@ type Account struct {
 }
 
 type AccountRepo interface {
-	GetByAccNum(accNum string) (Account, error)
-	Transfer(toAccNum string, amount int) error
+	GetByAccNum(accNum string) (*Account, error)
+	Transfer(from, to string, amount int) error
+}
+
+type AccountUseCase interface {
+	GetByAccNum(accNum string) (*Account, error)
+	Transfer(from, to string, amount int) error
 }
