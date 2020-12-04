@@ -13,7 +13,6 @@ type mockStruct struct {
 
 func TestValidateInputNotEmpty(t *testing.T) {
 	t.Run("", func(t *testing.T) {
-		// mockDataValid := mockStruct{s: "string", i: 1, p: &i}
 		mockDataNotValid := []mockStruct{
 			{
 				s: "",
@@ -27,9 +26,13 @@ func TestValidateInputNotEmpty(t *testing.T) {
 				s: "string",
 				i: 0,
 			},
+			{
+				s: "string",
+				i: 1,
+			},
 		}
 		for j, mock := range mockDataNotValid {
-			if j == len(mockDataNotValid) {
+			if j == len(mockDataNotValid)-1 {
 				err := ValidateInputNotEmpty(mock.s, mock.i)
 				assert.Nil(t, err)
 			} else {
