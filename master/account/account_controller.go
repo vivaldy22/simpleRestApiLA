@@ -24,7 +24,7 @@ func (a *accController) getAccByAccNum(w http.ResponseWriter, r *http.Request) {
 	accNum := varMux.GetVarsMux("account_number", r)
 	data, err := a.accUseCase.GetByAccNum(accNum)
 	if err != nil {
-		respJson.WriteJSON(false, http.StatusNoContent, "Get Data Failed", nil, err, w)
+		respJson.WriteJSON(false, http.StatusNotFound, "Data not found", nil, err, w)
 	} else {
 		respJson.WriteJSON(true, http.StatusOK, "Data found", data, nil, w)
 	}
