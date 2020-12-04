@@ -9,11 +9,11 @@ import (
 )
 
 type accUseCase struct {
-	models.AccountRepo
+	r models.AccountRepo
 }
 
 func (a *accUseCase) GetByAccNum(accNum string) (*models.Account, error) {
-	return a.GetByAccNum(accNum)
+	return a.r.GetByAccNum(accNum)
 }
 
 func (a *accUseCase) TransferBalance(from, to, amount string) (string, error) {
@@ -49,7 +49,7 @@ func (a *accUseCase) TransferBalance(from, to, amount string) (string, error) {
 		return "You can not transfer to your own account", errors.New("can not transfer same account")
 	}
 
-	if err = a.Transfer(from, to, amount); err != nil {
+	if err = a.r.Transfer(from, to, amount); err != nil {
 		return "Transfer failed, see logs", err
 	}
 

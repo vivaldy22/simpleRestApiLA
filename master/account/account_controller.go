@@ -11,7 +11,7 @@ import (
 )
 
 type accController struct {
-	models.AccountUseCase
+	c models.AccountUseCase
 }
 
 func NewController(accUseCase models.AccountUseCase, r *mux.Router) {
@@ -24,7 +24,7 @@ func NewController(accUseCase models.AccountUseCase, r *mux.Router) {
 func (a *accController) getAccByAccNum(w http.ResponseWriter, r *http.Request) {
 	accNum := varMux.GetVarsMux("account_number", r)
 
-	data, err := a.GetByAccNum(accNum)
+	data, err := a.c.GetByAccNum(accNum)
 	if err != nil {
 		respJson.WriteJSON(false, http.StatusNotFound, "Data not found", nil, err, w)
 		return
@@ -42,7 +42,7 @@ func (a *accController) transferBalance(w http.ResponseWriter, r *http.Request) 
 		return
 	}
 
-	msg, err := a.TransferBalance(from, transferInfo.ToAccountNumber, transferInfo.Amount)
+	msg, err := a.c.TransferBalance(from, transferInfo.ToAccountNumber, transferInfo.Amount)
 	if err != nil {
 		respJson.WriteJSON(false, http.StatusNotFound, msg, nil, err, w)
 		return
