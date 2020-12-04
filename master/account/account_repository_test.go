@@ -20,12 +20,6 @@ var ma1 = &models.Account{
 	Balance:        "20000",
 }
 
-var ma2 = &models.Account{
-	AccountNumber:  "123457",
-	CustomerNumber: "2002",
-	Balance:        "10000",
-}
-
 var mt = &models.Transfer{
 	ToAccountNumber: "123457",
 	Amount:          "100",
