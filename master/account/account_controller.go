@@ -1,6 +1,7 @@
 package account
 
 import (
+	"encoding/json"
 	"net/http"
 
 	"github.com/gorilla/mux"
@@ -22,14 +23,30 @@ func NewController(accUseCase models.AccountUseCase, r *mux.Router) {
 
 func (a *accController) getAccByAccNum(w http.ResponseWriter, r *http.Request) {
 	accNum := varMux.GetVarsMux("account_number", r)
+
 	data, err := a.accUseCase.GetByAccNum(accNum)
 	if err != nil {
 		respJson.WriteJSON(false, http.StatusNotFound, "Data not found", nil, err, w)
-	} else {
-		respJson.WriteJSON(true, http.StatusOK, "Data found", data, nil, w)
+		return
 	}
+	respJson.WriteJSON(true, http.StatusOK, "Data found", data, nil, w)
 }
 
 func (a *accController) transferBalance(w http.ResponseWriter, r *http.Request) {
+	var transferInfo = new(models.Transfer)
+	from := varMux.GetVarsMux("from_account_number", r)
 
+	err := json.NewDecoder(r.Body).Decode(transferInfo)
+	if err != nil {
+		respJson.WriteJSON(false, http.StatusBadRequest, "Decoding json failed", nil, err, w)
+		return
+	}
+
+	msg, err := a.accUseCase.Transfer(from, transferInfo.ToAccountNumber, transferInfo.Amount)
+	if err != nil {
+		respJson.WriteJSON(false, http.StatusNotFound, msg, nil, err, w)
+		return
+	}
+
+	respJson.WriteJSON(true, http.StatusCreated, msg, nil, nil, w)
 }

@@ -2,6 +2,7 @@ package account
 
 import (
 	"database/sql"
+
 	"github.com/vivaldy22/simpleRestApiLA/models"
 	"github.com/vivaldy22/simpleRestApiLA/tools/queries"
 )
@@ -21,7 +22,7 @@ func (a *accRepo) GetByAccNum(accNum string) (*models.Account, error) {
 	return acc, nil
 }
 
-func (a *accRepo) Transfer(from, to string, amount int) error {
+func (a *accRepo) Transfer(from, to, amount string) error {
 	tx, err := a.db.Begin()
 	if err != nil {
 		return err
@@ -32,7 +33,7 @@ func (a *accRepo) Transfer(from, to string, amount int) error {
 		return err
 	}
 
-	_, err = stmt.Exec(from, amount, to, amount)
+	_, err = stmt.Exec(from, amount, to, amount, from, to)
 	if err != nil {
 		return tx.Rollback()
 	}
