@@ -25,6 +25,6 @@ func InitDB() (*sql.DB, error) {
 	if err != nil {
 		return nil, err
 	}
-	log.Printf("Database connected, %v\n", schemaName)
+	log.Printf("[MySQL] Database connected, %v\n", schemaName)
 	return dbConn, nil
 }
