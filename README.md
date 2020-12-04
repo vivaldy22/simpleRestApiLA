@@ -129,7 +129,7 @@ This project was made using:
     * **Content:**
     ``` json
         {
-            "message": "Amount is not a valid number",
+            "message": "Your Balance is not enough",
             "error_code": 404
         }
     ```
