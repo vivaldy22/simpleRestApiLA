@@ -1,15 +1,12 @@
 package config
 
 import (
-	"database/sql"
 	"fmt"
 	"log"
 	"net/http"
 
 	"github.com/gorilla/mux"
-	"github.com/vivaldy22/simpleRestApiLA/master/account"
-	"github.com/vivaldy22/simpleRestApiLA/middleware"
-	"github.com/vivaldy22/simpleRestApiLA/tools/viper"
+	"github.com/vivaldy22/simpleRestApiLA/tools/myViper"
 )
 
 func CreateRouter() *mux.Router {
@@ -17,8 +14,8 @@ func CreateRouter() *mux.Router {
 }
 
 func RunServer(r *mux.Router) {
-	host := viper.GetEnv("API_HOST", "localhost")
-	port := viper.GetEnv("API_PORT", "8080")
+	host := myViper.GetEnv("API_HOST", "localhost")
+	port := myViper.GetEnv("API_PORT", "8080")
 
 	log.Printf("Starting Web Server at %v port: %v", host, port)
 	fmt.Println("Available endpoints:")
@@ -35,13 +32,4 @@ func RunServer(r *mux.Router) {
 	if err != nil {
 		log.Fatal(err)
 	}
-}
-
-func InitRouters(db *sql.DB, r *mux.Router) {
-	r.Use(middleware.ActivityLogMiddleware)
-	r.Use(middleware.CORSMiddleware)
-
-	accRepo := account.NewRepo(db)
-	accUseCase := account.NewUseCase(accRepo)
-	account.NewController(accUseCase, r)
 }

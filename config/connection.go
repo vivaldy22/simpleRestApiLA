@@ -6,16 +6,15 @@ import (
 	"log"
 
 	_ "github.com/go-sql-driver/mysql"
-	"github.com/vivaldy22/simpleRestApiLA/tools/viper"
+	"github.com/vivaldy22/simpleRestApiLA/tools/myViper"
 )
 
 func InitDB() (*sql.DB, error) {
-	dbUser := viper.GetEnv("DB_USER", "root")
-	dbPass := viper.GetEnv("DB_PASSWORD", "password")
-	dbHost := viper.GetEnv("DB_HOST", "localhost")
-	dbPort := viper.GetEnv("DB_PORT", "3306")
-	schemaName := viper.GetEnv("DB_SCHEMA", "schema")
-	log.Println(dbUser, dbPass, dbHost, dbPort, schemaName)
+	dbUser := myViper.GetEnv("DB_USER", "root")
+	dbPass := myViper.GetEnv("DB_PASSWORD", "password")
+	dbHost := myViper.GetEnv("DB_HOST", "localhost")
+	dbPort := myViper.GetEnv("DB_PORT", "3306")
+	schemaName := myViper.GetEnv("DB_SCHEMA", "schema")
 
 	dbPath := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s", dbUser, dbPass, dbHost, dbPort, schemaName)
 	dbConn, err := sql.Open("mysql", dbPath)
