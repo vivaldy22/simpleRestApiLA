@@ -13,7 +13,7 @@ func TestInitDBWithoutConfig(t *testing.T) {
 }
 
 func TestInitDBWithConfig(t *testing.T) {
-	os.Setenv("DB_USER", "root")
+	os.Setenv("DB_USER", "dididlav")
 	os.Setenv("DB_PASSWORD", "gang")
 	os.Setenv("DB_HOST", "localhost")
 	os.Setenv("DB_PORT", "3306")
