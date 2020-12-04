@@ -3,6 +3,8 @@ package main
 import (
 	"log"
 
+	"github.com/vivaldy22/simpleRestApiLA/master"
+
 	"github.com/vivaldy22/simpleRestApiLA/config"
 )
 
@@ -13,6 +15,6 @@ func main() {
 		return
 	}
 	router := config.CreateRouter()
-	config.InitRouters(db, router)
+	master.InitRouters(db, router)
 	config.RunServer(router)
 }
