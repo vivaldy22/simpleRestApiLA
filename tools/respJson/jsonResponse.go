@@ -17,8 +17,10 @@ func WriteJSON(success bool, code int, msg string, data interface{}, err error, 
 	w.WriteHeader(code)
 
 	if success {
-		jsonResp, _ := json.Marshal(data)
-		w.Write(jsonResp)
+		if data != nil {
+			jsonResp, _ := json.Marshal(data)
+			w.Write(jsonResp)
+		}
 	} else {
 		resp := &failJSONResponse{
 			Message:   fmt.Sprintf("%v", msg),
