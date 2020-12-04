@@ -124,6 +124,7 @@ This project was made using:
       }
     ```
   OR
+    * There are multiple error message with code 404, this is one of them
     * **Code:** 404 <br />
     * **Content:**
     ``` json
