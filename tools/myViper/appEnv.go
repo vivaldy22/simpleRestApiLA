@@ -5,8 +5,10 @@ import (
 )
 
 func GetEnv(key, defaultValue string) string {
+	viper.SetConfigType("env")
+	viper.AddConfigPath(".")
+	viper.SetConfigFile("./.env")
 	viper.AutomaticEnv()
-	viper.SetConfigFile(".env")
 	viper.ReadInConfig()
 
 	if envVal := viper.GetString(key); len(envVal) != 0 {
