@@ -4,7 +4,7 @@ import (
 	"github.com/spf13/viper"
 )
 
-func ViperGetEnv(key, defaultValue string) string {
+func GetEnv(key, defaultValue string) string {
 	viper.AutomaticEnv()
 	viper.SetConfigFile(".env")
 	viper.ReadInConfig()

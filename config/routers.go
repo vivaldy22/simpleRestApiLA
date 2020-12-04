@@ -17,8 +17,8 @@ func CreateRouter() *mux.Router {
 }
 
 func RunServer(r *mux.Router) {
-	host := viper.ViperGetEnv("API_HOST", "localhost")
-	port := viper.ViperGetEnv("API_PORT", "8080")
+	host := viper.GetEnv("API_HOST", "localhost")
+	port := viper.GetEnv("API_PORT", "8080")
 
 	log.Printf("Starting Web Server at %v port: %v", host, port)
 	fmt.Println("Available endpoints:")
