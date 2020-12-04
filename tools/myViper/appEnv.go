@@ -1,4 +1,4 @@
-package viper
+package myViper
 
 import (
 	"github.com/spf13/viper"
@@ -7,7 +7,7 @@ import (
 func GetEnv(key, defaultValue string) string {
 	viper.SetConfigType("env")
 	viper.AddConfigPath(".")
-	viper.SetConfigFile("./.env")
+	viper.SetConfigFile(".env")
 	viper.AutomaticEnv()
 	viper.ReadInConfig()
 
