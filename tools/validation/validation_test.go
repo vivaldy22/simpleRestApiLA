@@ -28,9 +28,14 @@ func TestValidateInputNotEmpty(t *testing.T) {
 				i: 0,
 			},
 		}
-		for _, mock := range mockDataNotValid {
-			err := ValidateInputNotEmpty(mock.s, mock.i)
-			assert.NotNil(t, err)
+		for j, mock := range mockDataNotValid {
+			if j == len(mockDataNotValid) {
+				err := ValidateInputNotEmpty(mock.s, mock.i)
+				assert.Nil(t, err)
+			} else {
+				err := ValidateInputNotEmpty(mock.s, mock.i)
+				assert.NotNil(t, err)
+			}
 		}
 	})
 }
