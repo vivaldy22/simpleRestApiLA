@@ -14,7 +14,7 @@ func CreateRouter() *mux.Router {
 }
 
 func RunServer(r *mux.Router) {
-	host := myViper.GetEnv("API_HOST", "localhost")
+	host := myViper.GetEnv("API_HOST", "")
 	port := myViper.GetEnv("API_PORT", "8080")
 
 	log.Printf("Starting Web Server at %v port: %v", host, port)
@@ -28,7 +28,7 @@ func RunServer(r *mux.Router) {
 		return nil
 	})
 	fmt.Println()
-	err := http.ListenAndServe(host+": "+port, r)
+	err := http.ListenAndServe(host+":"+port, r)
 	if err != nil {
 		log.Fatal(err)
 	}

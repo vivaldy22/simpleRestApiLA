@@ -1,0 +1,27 @@
+version: "3"
+services: 
+  fullstack-mysql:
+    container_name: full_db_mysql
+    restart: always
+    build: ./database
+    ports:
+      - 3306:3306
+    environment: 
+      - MYSQL_ROOT_PASSWORD=root
+    networks: 
+      - fullstack
+  
+  app:
+    container_name: full_app
+    build: .
+    ports:
+      - 8080:8080
+    restart: always
+    depends_on: 
+      - fullstack-mysql
+    networks: 
+      - fullstack
+
+networks:
+  fullstack:
+    driver: bridge
