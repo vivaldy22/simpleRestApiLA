@@ -10,8 +10,8 @@ This project was made using:
  2. MySQL / MariaDB
 
 ## Preparation
- 1. Import the database provided in db.sql file
- 2. **Important** If you're executing with docker, you don't need to change anything in .env file
+ 1. Import the database provided in database/db.sql file
+ 2. **Important** If you're executing with docker, you don't need to change anything in .env file. You can just skip step 3 and 4
  3. Inside .env file, there are configurations needed for the api to run,
   change them according to your system. The most important variable that 
   you have to change is:  
