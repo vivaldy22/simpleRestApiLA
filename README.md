@@ -11,18 +11,22 @@ This project was made using:
 
 ## Preparation
  1. Import the database provided in db.sql file
- 2. Inside .env file, there are configurations needed for the api to run,
+ 2. **Important** If you're executing with docker, you don't need to change anything in .env file
+ 3. Inside .env file, there are configurations needed for the api to run,
   change them according to your system. The most important variable that 
-  you have to change is: 
-    ``` .env  
+  you have to change is:  
        - DB_USER
        - DB_PASSWORD
        - API_HOST (optional)
        - API_PORT (optional) 
-    ```
- 3. (Optional) Install ```make``` program for your system
+ 4. (Optional) Install ```make``` program for your system
 
-## Execution
+## Execution with Docker
+ 1. Launch your terminal
+ 2. Go to the directory of this project
+ 3. Type ```docker-compose up --build```
+
+## Execution without Docker
  1. Launch your terminal
  2. Go to the directory of this project
  3. Type ```make dev``` in the terminal. If your terminal says make command not found, 
