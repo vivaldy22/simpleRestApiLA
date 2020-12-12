@@ -37,6 +37,7 @@ This project was made using:
       net stop MySQL
     ```
     - If the commands doesn't work, you need to search how to stop mysql service for your OS.
+5.  If you any error after executin `docker-compose up --build` try to run it with `sudo` so the command should be something like this `sudo docker-compose up --build`
 
 ## Execution without Docker
 
